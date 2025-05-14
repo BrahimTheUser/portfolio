@@ -1,273 +1,957 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Modern Chronicle</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/variables.css">
-    <link rel="stylesheet" href="/css/typography.css">
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/components.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Web Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="site-header">
-        <div class="container">
-          <div class="logo">
-            <h1>The Modern Chronicle</h1>
-          </div>
-          <nav class="main-nav">
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">
-              <span></span>
-            </label>
-            <ul>
-              <li><a href="#" class="active">Home</a></li>
-              <li><a href="#">Politics</a></li>
-              <li><a href="#">Technology</a></li>
-              <li><a href="#">Culture</a></li>
-              <li><a href="#">Science</a></li>
-              <li><a href="#">Health</a></li>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --text-color: #2b2c34;
+            --light-color: #fffffe;
+            --bg-color: #f8f9fa;
+            --accent-color: #4cc9f0;
+            --danger-color: #ef476f;
+            --section-padding: 5rem 2rem;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px;
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.85), rgba(58, 12, 163, 0.85)), 
+                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600') center/cover;
+            position: relative;
+            color: var(--light-color);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            color: var(--light-color);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* About Section */
+        #about {
+            padding: var(--section-padding);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Projects Section */
+        #projects {
+            padding: var(--section-padding);
+            background-color: #fff;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: var(--accent-color);
+            position: relative;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Skills Section */
+        #skills {
+            padding: var(--section-padding);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-item i {
+            color: var(--primary-color);
+        }
+        
+        /* Contact Section */
+        #contact {
+            padding: var(--section-padding);
+            background-color: #fff;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 4rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2b2c34;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: var(--transition);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin-left: 0;
+            }
+            
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            :root {
+                --section-padding: 3rem 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="container">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">JD</div>
+                <span>John Doe</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-          </nav>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>Hi, I'm John Doe</h1>
+            <p>Front-end Developer & UI/UX Designer</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn" style="background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">Contact Me</a>
+            </div>
         </div>
-      </header>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
 
-      <main>
-        <section class="hero">
-          <div class="container">
-            <div class="hero-content">
-              <div class="category-tag">Featured</div>
-              <h2>The Rise of Sustainable Architecture in Modern Cities</h2>
-              <p class="hero-excerpt">How eco-friendly buildings are reshaping urban landscapes and combating climate change.</p>
-              <div class="article-meta">
-                <span class="author">By Jane Smith</span>
-                <span class="date">August 15, 2025</span>
-                <span class="read-time">9 min read</span>
-              </div>
-              <a href="#" class="btn-primary">Read Article</a>
-            </div>
-          </div>
-        </section>
-
-        <div class="container main-content">
-          <div class="articles-grid">
-            <article class="article-card featured">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg" alt="Tech workplace">
-                <div class="category-tag">Technology</div>
-              </div>
-              <div class="article-content">
-                <h3>The Future of Work: How AI is Transforming Offices</h3>
-                <p>Artificial intelligence is reshaping how we work and collaborate in modern workspaces.</p>
-                <div class="article-meta">
-                  <span class="author">By John Doe</span>
-                  <span class="date">August 14, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" alt="Culture event">
-                <div class="category-tag">Culture</div>
-              </div>
-              <div class="article-content">
-                <h3>Renaissance of Local Art Scenes Post-Pandemic</h3>
-                <p>How community art movements are thriving and evolving after global lockdowns.</p>
-                <div class="article-meta">
-                  <span class="author">By Sarah Johnson</span>
-                  <span class="date">August 12, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg" alt="Science lab">
-                <div class="category-tag">Science</div>
-              </div>
-              <div class="article-content">
-                <h3>Breakthrough in Quantum Computing Reaches New Milestone</h3>
-                <p>Scientists achieve quantum supremacy with record-breaking calculation speeds.</p>
-                <div class="article-meta">
-                  <span class="author">By Robert Chen</span>
-                  <span class="date">August 10, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/3184419/pexels-photo-3184419.jpeg" alt="Health and wellness">
-                <div class="category-tag">Health</div>
-              </div>
-              <div class="article-content">
-                <h3>New Study Reveals Benefits of Intermittent Fasting</h3>
-                <p>Research shows promising results for metabolic health and longevity.</p>
-                <div class="article-meta">
-                  <span class="author">By Maria Garcia</span>
-                  <span class="date">August 8, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg" alt="Politics">
-                <div class="category-tag">Politics</div>
-              </div>
-              <div class="article-content">
-                <h3>Global Summit Addresses Climate Emergency</h3>
-                <p>World leaders commit to ambitious carbon reduction targets by 2030.</p>
-                <div class="article-meta">
-                  <span class="author">By David Wilson</span>
-                  <span class="date">August 5, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/8353802/pexels-photo-8353802.jpeg" alt="Travel destination">
-                <div class="category-tag">Travel</div>
-              </div>
-              <div class="article-content">
-                <h3>Sustainable Tourism: The New Normal for Global Travelers</h3>
-                <p>How eco-conscious travel is reshaping the industry and local economies.</p>
-                <div class="article-meta">
-                  <span class="author">By Emma Thompson</span>
-                  <span class="date">August 3, 2025</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="article-card">
-              <div class="article-image">
-                <img src="https://images.pexels.com/photos/1093946/pexels-photo-1093946.jpeg" alt="Politics">
-                <div class="category-tag">Politics</div>
-              </div>
-              <div class="article-content">
-                <h3>Global Summit Addresses Climate Emergency</h3>
-                <p>World leaders commit to ambitious carbon reduction targets by 2030.</p>
-                <div class="article-meta">
-                  <span class="author">By David Wilson</span>
-                  <span class="date">August 5, 2025</span>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <aside class="sidebar">
-            <div class="sidebar-section trending">
-              <h4>Trending Now</h4>
-              <ul class="trending-list">
-                <li>
-                  <span class="trending-number">01</span>
-                  <div class="trending-content">
-                    <a href="#">Climate Crisis: Arctic Ice Reaches Record Low</a>
-                    <span class="category-tag small">Environment</span>
-                  </div>
-                </li>
-                <li>
-                  <span class="trending-number">02</span>
-                  <div class="trending-content">
-                    <a href="#">New Breakthrough in Cancer Treatment Shows Promise</a>
-                    <span class="category-tag small">Health</span>
-                  </div>
-                </li>
-                <li>
-                  <span class="trending-number">03</span>
-                  <div class="trending-content">
-                    <a href="#">Tech Giants Face New Regulatory Challenges</a>
-                    <span class="category-tag small">Technology</span>
-                  </div>
-                </li>
-                <li>
-                  <span class="trending-number">04</span>
-                  <div class="trending-content">
-                    <a href="#">The Renaissance of Independent Bookstores</a>
-                    <span class="category-tag small">Culture</span>
-                  </div>
-                </li>
-                <li>
-                  <span class="trending-number">05</span>
-                  <div class="trending-content">
-                    <a href="#">Space Tourism: The Next Frontier in Travel</a>
-                    <span class="category-tag small">Science</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sidebar-section categories">
-              <h4>Categories</h4>
-              <ul class="categories-list">
-                <li><a href="#">Politics <span>(24)</span></a></li>
-                <li><a href="#">Technology <span>(19)</span></a></li>
-                <li><a href="#">Culture <span>(16)</span></a></li>
-                <li><a href="#">Science <span>(14)</span></a></li>
-                <li><a href="#">Health <span>(12)</span></a></li>
-                <li><a href="#">Environment <span>(10)</span></a></li>
-                <li><a href="#">Travel <span>(8)</span></a></li>
-                <li><a href="#">Business <span>(7)</span></a></li>
-              </ul>
-            </div>
-
-            <div class="sidebar-section editors-pick">
-              <h4>Editor's Pick</h4>
-              <div class="editors-article">
-                <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" alt="Editor's pick article">
-                <h5>The Surprising Impact of Urban Gardens on Mental Health</h5>
-                <p>How green spaces in cities are becoming crucial for psychological wellbeing.</p>
-                <a href="#" class="read-more">Read More</a>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </main>
-
-      <footer class="site-footer">
+    <!-- About Section -->
+    <section id="about">
         <div class="container">
-          <div class="footer-content">
-            <div class="footer-about">
-              <h4>About The Modern Chronicle</h4>
-              <p>Award-winning journalism delivering thought-provoking insights on politics, technology, culture, and more since 2020.</p>
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600" alt="John Doe">
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm John, a passionate front-end developer and UI/UX designer with over 5 years of experience creating beautiful, functional websites and applications.</p>
+                    <p>I specialize in creating responsive, user-friendly interfaces that provide exceptional user experiences. My approach combines clean code with creative design solutions to bring ideas to life.</p>
+                    <p>When I'm not coding, you can find me exploring new design trends, contributing to open-source projects, or hiking in the mountains.</p>
+                    <a href="#contact" class="btn">Let's Connect</a>
+                </div>
             </div>
-
-            <div class="footer-subscribe">
-              <h4>Stay Updated</h4>
-              <p>Subscribe to our weekly newsletter for the latest stories and insights.</p>
-              <form class="subscribe-form">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit" class="btn-subscribe">Subscribe</button>
-              </form>
-            </div>
-
-            <div class="footer-links">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Advertise</a></li>
-                <li><a href="#">Careers</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="footer-bottom">
-            <p>&copy; 2025 The Modern Chronicle. All rights reserved.</p>
-          </div>
         </div>
-      </footer>
-    </div>
-  </body>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600" alt="E-commerce Website">
+                    </div>
+                    <div class="project-content">
+                        <h3>E-commerce Website</h3>
+                        <p>A fully responsive e-commerce platform built with HTML, CSS, and JavaScript. Features include product filtering, cart functionality, and checkout process.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn" style="background-color: var(--secondary-color);"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" class="btn" style="background-color: #333;"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600" alt="Weather Dashboard">
+                    </div>
+                    <div class="project-content">
+                        <h3>Weather Dashboard</h3>
+                        <p>An interactive weather application that displays current weather and forecasts. Uses JavaScript to fetch data from a weather API.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn" style="background-color: var(--secondary-color);"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" class="btn" style="background-color: #333;"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600" alt="Restaurant Website">
+                    </div>
+                    <div class="project-content">
+                        <h3>Restaurant Website</h3>
+                        <p>A modern restaurant website with online menu, reservation system, and beautiful animations. Built with HTML, CSS, and vanilla JavaScript.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn" style="background-color: var(--secondary-color);"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" class="btn" style="background-color: #333;"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Front-end</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-sass"></i>
+                            <span>Sass</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-npm"></i>
+                            <span>npm</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-figma"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-terminal"></i>
+                            <span>Command Line</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span>REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <i class="fas fa-users"></i>
+                            <span>Team Collaboration</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>Project Management</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Communication</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Problem Solving</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>john.doe@example.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>San Francisco, CA</span>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">John Doe</div>
+                <div class="footer-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 John Doe. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Form submission (prevent default behavior)
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Form validation and handling would go here
+            // For this demo, just log the values
+            console.log('Form Submitted:', { name, email, message });
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+        });
+        
+        // Highlight active section in navigation
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').substring(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Add active class to navigation links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+        
+        // Form field focus effects
+        const formControls = document.querySelectorAll('.form-control');
+        
+        formControls.forEach(control => {
+            control.addEventListener('focus', () => {
+                control.parentElement.classList.add('focused');
+            });
+            
+            control.addEventListener('blur', () => {
+                if (control.value === '') {
+                    control.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
